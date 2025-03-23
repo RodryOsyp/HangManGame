@@ -1,0 +1,10 @@
+.heart {
+  font-size: 60px;
+}
+.healthBar {
+  position: flex;
+  right: 100px;
+  top: 20px;
+  position: absolute;
+  gap: 20px;
+}
