@@ -4,9 +4,9 @@ import { useStore } from "../../store/game-store";
 import { useEffect } from "react";
 export const Header = () => {
   const { randomWord, targetWord, hideWord } = useStore();
-  console.log(hideWord);
+  // console.log(hideWord);
   useEffect(() => {targetWord()}, []);
-  console.log(randomWord);
+  // console.log(randomWord);
   
 
   return (  

@@ -8,8 +8,8 @@ export const HealthBar = () => {
     <div className={style.healthBar}>
       {Array(health)
         .fill(null)
-        .map(() => (
-          <MdHeartBroken color="red" className={style.heart} />
+        .map((e) => (
+          <MdHeartBroken key={e} color="blueviolet" className={style.heart} />
         ))}
     </div>
   );

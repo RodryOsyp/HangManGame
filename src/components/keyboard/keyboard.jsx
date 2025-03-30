@@ -4,15 +4,13 @@ import { KEY_ESCAPE } from "keycode-js";
 import { useStore } from "../../store/game-store";
 
 export const Keyboard = () => {
-  const {currentLetter, setCurrentLetter} = useStore()
+  const {currentLetter, setCurrentLetter, updateHideWord} = useStore()
   
   const symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const handleEscapeKeyDown = (e) => {
-    // if (e.keyCode === KEY_ESCAPE) {
-    //   console.log("Яна цист");
-    // }
-    setCurrentLetter(String.fromCharCode(e.keyCode))
-  };
+        const letter = String.fromCharCode(e.keyCode);
+        setCurrentLetter(letter);
+    };
 
   
 
@@ -26,6 +24,7 @@ export const Keyboard = () => {
 
   return (
     <div className={style.container}>
+      <h1>LETER: {currentLetter}</h1>
       <div className={style.symbols}>
         {symbols.split("").map((e, i) => (
           <div
@@ -33,6 +32,7 @@ export const Keyboard = () => {
             className={
              currentLetter === e? `${style.active} ${style.symbol}` : style.symbol
             }
+            
           >
             {e}
           </div>

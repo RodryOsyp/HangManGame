@@ -16,16 +16,16 @@ function App() {
       <div className="wrapper">
         {startGame ? (
           <>
-           {health <= 0 ? (
-          <GameOver />
-        ) : (
-          <>
-            <Header />
-            <HealthBar />
-            <Word />
-            <Keyboard />
-          </>
-        )}
+            {health <= 0 ? (
+              <GameOver />
+            ) : (
+              <>
+                <Header />
+                <HealthBar />
+                <Word />
+                <Keyboard />
+              </>
+            )}
           </>
         ) : (
           <GameStart />

@@ -4,9 +4,9 @@ import { useStore } from '../../store/game-store'
 export const GameOver = () => {
     const {resetGame} = useStore()
   return (
-    <div>
-        <div className={style.header}>Game Over</div>
-        <div className={style.restart} onClick={resetGame}>RESTART</div>
+    <div className={style.wrapper}>
+      <div className={style.header}>Game Over</div>
+      <div className={style.restart} onClick={resetGame}>RESTART</div>
     </div>
   )
 }
