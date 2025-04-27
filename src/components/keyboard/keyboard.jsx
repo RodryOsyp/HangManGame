@@ -18,9 +18,9 @@ export const Keyboard = () => {
     const letter = String.fromCharCode(e.keyCode);
     symbols.includes(letter) ? setCurrentLetter(letter) : "";
     console.log(String.fromCharCode(e.keyCode));
-    setGuessesLetters(letter)
-    console.log(guessesLetters);
-    
+    setGuessesLetters(letter);
+    const updatedGuessesLetters = useStore.getState().guessesLetters;
+    console.log(updatedGuessesLetters);
   };
 
   useEffect(() => {
