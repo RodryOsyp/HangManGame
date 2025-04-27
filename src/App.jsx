@@ -10,13 +10,14 @@ import {
 import { useStore } from "./store/game-store";
 
 function App() {
-  const { health, setStartGame, startGame } = useStore();
+  const store = useStore();
+  
   return (
     <>
       <div className="wrapper">
-        {startGame ? (
+        {store.startGame ? (
           <>
-            {health <= 0 ? (
+            {store.health <= 0 ? (
               <GameOver />
             ) : (
               <>

@@ -3,9 +3,9 @@ import style from "./header.module.css";
 import { useStore } from "../../store/game-store";
 import { useEffect } from "react";
 export const Header = () => {
-  const { randomWord, targetWord, hideWord } = useStore();
+  const { randomWord, hideWord } = useStore();
   // console.log(hideWord);
-  useEffect(() => {targetWord()}, []);
+  useEffect(() => {}, []);
   // console.log(randomWord);
   
 

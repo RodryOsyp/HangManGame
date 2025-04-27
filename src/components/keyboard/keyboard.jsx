@@ -9,7 +9,9 @@ export const Keyboard = () => {
   const symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const handleEscapeKeyDown = (e) => {
         const letter = String.fromCharCode(e.keyCode);
-        setCurrentLetter(letter);
+        symbols.includes(letter) ? setCurrentLetter(letter) : ""
+        console.log(String.fromCharCode(e.keyCode));
+        
     };
 
   
