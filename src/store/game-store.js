@@ -20,26 +20,30 @@ export const useStore = create((set, get) => ({
   minusHealth: () => set((state) => ({ health: state.health - 1 })),
   resetGame: () =>
     set((state) => ({
-      randomWord: words[Math.floor(Math.random() * words.length)],
-      health: 3,
+      randomWord,
+      hideWord: randomWord.replace(/[a-zA-Zа]/g, "‎"),
+      health:4,
+      guessesLetters: [],
+      startGame: false,
+      currentLetter: "",
     })),
-    setStartGame: () => {
-      const randomWord = words[Math.floor(Math.random() * words.length)];
-      const difficult = get().difficult;
-      let health = 4;
-      if (difficult === "Easy")  health = 4;
-      if (difficult === "Medium") health = 3;
-      if (difficult === "Hard") health = 2;
-    
-      set({
-        randomWord,
-        hideWord: randomWord.replace(/[a-zA-Zа]/g, "‎"),
-        health,
-        guessesLetters: [],
-        startGame: true,
-        currentLetter: "",
-      });
-    },
+  setStartGame: () => {
+    const randomWord = words[Math.floor(Math.random() * words.length)];
+    const difficult = get().difficult;
+    let health = 4;
+    if (difficult === "Easy") health = 4;
+    if (difficult === "Medium") health = 3;
+    if (difficult === "Hard") health = 2;
+
+    set({
+      randomWord,
+      hideWord: randomWord.replace(/[a-zA-Zа]/g, "‎"),
+      health,
+      guessesLetters: [],
+      startGame: true,
+      currentLetter: "",
+    });
+  },
 
   setDifficult: (difficult) => set(() => ({ difficult })),
 }));

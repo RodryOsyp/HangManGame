@@ -4,17 +4,24 @@ import { KEY_ESCAPE } from "keycode-js";
 import { useStore } from "../../store/game-store";
 
 export const Keyboard = () => {
-  const {currentLetter, setCurrentLetter, updateHideWord} = useStore()
-  
+  const {
+    currentLetter,
+    setCurrentLetter,
+    setResetGame,
+    randomWord,
+    guessesLetters,
+    setGuessesLetters,
+  } = useStore();
+
   const symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const handleEscapeKeyDown = (e) => {
-        const letter = String.fromCharCode(e.keyCode);
-        symbols.includes(letter) ? setCurrentLetter(letter) : ""
-        console.log(String.fromCharCode(e.keyCode));
-        
-    };
-
-  
+    const letter = String.fromCharCode(e.keyCode);
+    symbols.includes(letter) ? setCurrentLetter(letter) : "";
+    console.log(String.fromCharCode(e.keyCode));
+    setGuessesLetters(letter)
+    console.log(guessesLetters);
+    
+  };
 
   useEffect(() => {
     window.addEventListener("keydown", handleEscapeKeyDown);
@@ -32,9 +39,10 @@ export const Keyboard = () => {
           <div
             key={i}
             className={
-             currentLetter === e? `${style.active} ${style.symbol}` : style.symbol
+              currentLetter === e
+                ? `${style.active} ${style.symbol}`
+                : style.symbol
             }
-            
           >
             {e}
           </div>
