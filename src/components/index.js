@@ -4,3 +4,4 @@ export {Word} from "./word";
 export {HealthBar} from "./healthBar";
 export {GameOver} from "./gameOver";
 export {GameStart} from "./gameStart";
+export {Congratulation} from "./congratulation";

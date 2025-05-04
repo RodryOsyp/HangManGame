@@ -16,7 +16,7 @@ export const Keyboard = () => {
   const symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const handleEscapeKeyDown = (e) => {
     const letter = String.fromCharCode(e.keyCode).toUpperCase();
-
+    
     if (!symbols.includes(letter)) return;
 
     const {
@@ -26,15 +26,22 @@ export const Keyboard = () => {
       setGuessesLetters,
       updateHideWord,
       minusHealth,
+      setIsWin,
+      hideWord,
     } = useStore.getState();
-
+    console.log(`Hide ${hideWord}`);
+    console.log(`random ${randomWord}`);
     if (guessesLetters.includes(letter)) return;
-
+    
     setCurrentLetter(letter);
     setGuessesLetters(letter);
 
     if (randomWord.toUpperCase().includes(letter)) {
+      // hideWord === randomWord ? setIsWin() : ;
       updateHideWord(letter);
+
+      
+     
     } else {
       minusHealth();
     }

@@ -6,6 +6,7 @@ import {
   HealthBar,
   GameOver,
   GameStart,
+  Congratulation,
 } from "./components";
 import { useStore } from "./store/game-store";
 
@@ -15,6 +16,7 @@ function App() {
   return (
     <>
       <div className="wrapper">
+        {store.isWin&&<Congratulation/>}
         {store.startGame ? (
           <>
             {store.health <= 0 ? (
