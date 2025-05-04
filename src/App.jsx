@@ -12,6 +12,7 @@ import { useStore } from "./store/game-store";
 
 function App() {
   const store = useStore();
+  console.log(store.isWin);
   
   return (
     <>
