@@ -12,15 +12,32 @@ export const Keyboard = () => {
     guessesLetters,
     setGuessesLetters,
   } = useStore();
-
+  console.log(randomWord);
   const symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const handleEscapeKeyDown = (e) => {
-    const letter = String.fromCharCode(e.keyCode);
-    symbols.includes(letter) ? setCurrentLetter(letter) : "";
-    console.log(String.fromCharCode(e.keyCode));
+    const letter = String.fromCharCode(e.keyCode).toUpperCase();
+
+    if (!symbols.includes(letter)) return;
+
+    const {
+      randomWord,
+      guessesLetters,
+      setCurrentLetter,
+      setGuessesLetters,
+      updateHideWord,
+      minusHealth,
+    } = useStore.getState();
+
+    if (guessesLetters.includes(letter)) return;
+
+    setCurrentLetter(letter);
     setGuessesLetters(letter);
-    const updatedGuessesLetters = useStore.getState().guessesLetters;
-    console.log(updatedGuessesLetters);
+
+    if (randomWord.toUpperCase().includes(letter)) {
+      updateHideWord(letter);
+    } else {
+      minusHealth();
+    }
   };
 
   useEffect(() => {

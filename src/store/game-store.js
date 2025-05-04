@@ -16,7 +16,23 @@ export const useStore = create((set, get) => ({
   setCurrentLetter: (letter) => set(() => ({ currentLetter: letter })),
   setGuessesLetters: (letter) =>
     set((state) => ({ guessesLetters: [...state.guessesLetters, letter] })),
-
+  updateHideWord: (letter) => {
+    const { randomWord, hideWord } = get();
+    const newHideWord = randomWord
+      .split("")
+      .map((char, index) => {
+        const isAlreadyOpened = hideWord[index] !== "_" && hideWord[index] !== "‎";
+        if (isAlreadyOpened) {
+          return hideWord[index];
+        }
+        if (char.toLowerCase() === letter.toLowerCase()) {
+          return char;
+        }
+        return "\u200E"; 
+      })
+      .join("");
+    set({ hideWord: newHideWord });
+  },
   minusHealth: () => set((state) => ({ health: state.health - 1 })),
   resetGame: () =>
     set((state) => ({
