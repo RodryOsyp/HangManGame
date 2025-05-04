@@ -20,14 +20,12 @@ export const useStore = create((set, get) => ({
   setGuessesLetters: (letter) =>
     set((state) => ({ guessesLetters: [...state.guessesLetters, letter] })),
   updateHideWord: (letter) => {
-    const { randomWord, hideWord } = get();
-    // console.log(`Hide ${hideWord}`);
-    // console.log(`random ${randomWord}`);
+    const { randomWord, hideWord, setIsWin } = get();
+  
     const newHideWord = randomWord
       .split("")
       .map((char, index) => {
-        const isAlreadyOpened =
-          hideWord[index] !== "_" && hideWord[index] !== "‎";
+        const isAlreadyOpened = hideWord[index] !== "_" && hideWord[index] !== "\u200E";
         if (isAlreadyOpened) {
           return hideWord[index];
         }
@@ -37,7 +35,16 @@ export const useStore = create((set, get) => ({
         return "\u200E";
       })
       .join("");
+  
     set({ hideWord: newHideWord });
+  
+    const allRevealed = newHideWord.split("").every((ch, i) => {
+      return ch.toLowerCase() === randomWord[i].toLowerCase();
+    });
+  
+    if (allRevealed) {
+      setIsWin();
+    }
   },
   minusHealth: () => set((state) => ({ health: state.health - 1 })),
   resetGame: () =>
