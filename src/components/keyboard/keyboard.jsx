@@ -12,7 +12,7 @@ export const Keyboard = () => {
     guessesLetters,
     setGuessesLetters,
   } = useStore();
-  console.log(randomWord);
+  // console.log(randomWord);
   const symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const handleEscapeKeyDown = (e) => {
     const letter = String.fromCharCode(e.keyCode).toUpperCase();
@@ -29,8 +29,8 @@ export const Keyboard = () => {
       setIsWin,
       hideWord,
     } = useStore.getState();
-    console.log(`Hide ${hideWord}`);
-    console.log(`random ${randomWord}`);
+    // console.log(`Hide ${hideWord}`);
+    // console.log(`random ${randomWord}`);
     if (guessesLetters.includes(letter)) return;
     
     setCurrentLetter(letter);
