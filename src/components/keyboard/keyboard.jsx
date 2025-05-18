@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import style from "./keyboard.module.css";
-import { KEY_ESCAPE } from "keycode-js";
 import { useStore } from "../../store/game-store";
 
 export const Keyboard = () => {
   const {
     currentLetter,
     setCurrentLetter,
-    setResetGame,
     randomWord,
     guessesLetters,
     setGuessesLetters,
+    updateHideWord,
+    minusHealth,
   } = useStore();
-  // console.log(randomWord);
+
   const symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const handleEscapeKeyDown = (e) => {
+
+  const handleKeyDown = (e) => {
     const letter = String.fromCharCode(e.keyCode).toUpperCase();
-    
     if (!symbols.includes(letter)) return;
 
     const {
@@ -26,51 +26,46 @@ export const Keyboard = () => {
       setGuessesLetters,
       updateHideWord,
       minusHealth,
-      setIsWin,
-      hideWord,
     } = useStore.getState();
-    // console.log(`Hide ${hideWord}`);
-    // console.log(`random ${randomWord}`);
+
     if (guessesLetters.includes(letter)) return;
-    
+
     setCurrentLetter(letter);
     setGuessesLetters(letter);
 
     if (randomWord.toUpperCase().includes(letter)) {
-      // hideWord === randomWord ? setIsWin() : ;
       updateHideWord(letter);
-
-      
-     
     } else {
       minusHealth();
     }
   };
 
   useEffect(() => {
-    window.addEventListener("keydown", handleEscapeKeyDown);
-
+    window.addEventListener("keydown", handleKeyDown);
     return () => {
-      window.removeEventListener("keydown", handleEscapeKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
   return (
     <div className={style.container}>
-      <h1>LETER: {currentLetter}</h1>
+      <h1>LETTER: {currentLetter}</h1>
       <div className={style.symbols}>
-        {symbols.split("").map((e, i) => (
-          <div
-            key={i}
-            className={
-              currentLetter === e
-                ? `${style.active} ${style.symbol}`
-                : style.symbol
-            }
-          >
-            {e}
-          </div>
-        ))}
+        {symbols.split("").map((e, i) => {
+          const isGuessed = guessesLetters.includes(e);
+          const isCorrect = randomWord.includes(e);
+          const letterClass = isGuessed
+            ? isCorrect
+              ? style.correct
+              : style.incorrect
+            : "";
+
+          return (
+            <div key={i} className={`${style.symbol} ${letterClass}`}>
+              {e}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
